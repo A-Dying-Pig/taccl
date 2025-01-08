@@ -26,4 +26,7 @@ def modify_header_only(input_folder, output_folder, fname):
 
 
 # modify_header_only("./", "./r", "Alltoall.n16-MI300X-MI300X-steps2-tacclsol-improve-1736366150_i1_scRemote1_IBContig.sccl.xml")
-modify_header_only("./", "./r", "Alltoall.n8-MI300X-DUMB-MI300X-DUMB-steps2-tacclsol-improve-1736374135_i1_scRemote1_IBContig.sccl.xml")
+# modify_header_only("./", "./r", "Alltoall.n8-MI300X-DUMB-MI300X-DUMB-steps2-tacclsol-improve-1736374135_i1_scRemote1_IBContig.sccl.xml")
+modify_header_only("./", "./r", "Alltoall.n24-MI300X-MI300X-steps5-tacclsol-improve-1736366411_i1_scRemote1_IBContig.sccl.xml")
+modify_header_only("./", "./r", "Alltoall.n24.chunks2-MI300X-MI300X-steps5.chunks2-tacclsol-improve-1736368291_i1_scRemote1_IBContig.sccl.xml")
+modify_header_only("./", "./r", "Alltoall.n32-MI300X-MI300X-steps5-tacclsol-improve-1736370321_i1_scRemote1_IBContig.sccl.xml")
