@@ -175,3 +175,75 @@ def ndv2(topo_file):
     name = topo_json["name"]
 
     return NodeTopology(f'NDv2-{name}', links, alpha, betas, invbws, nics_per_node, remote_invbw, remote_alpha, remote_beta)
+
+
+
+def mi300x(topo_file):
+    print("topo_file:", topo_file)
+    f = open(topo_file, "r")
+    topo_json = json.load(f)
+    f.close()
+    topo_json["nics_per_node"] = 8
+    topo_json["gpus_per_node"] = 8
+    print("Fixing nics_per_node and gpus_per_node. This will overwrite any values provided")
+    topo_json = validate_and_modify_topo(topo_json, check_links=False)
+    assert len(topo_json["node_invbws_list"]) == 1
+
+    # Link connection matrix
+    links = [
+        #0  1  2  3  4  5  6  7
+        [0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0]
+    ]
+
+    alpha = topo_json["alpha"]
+
+    # NVLink beta for each link
+    beta_m = topo_json["node_betas_list"][0]
+    betas = [
+        [0, beta_m, beta_m, beta_m, beta_m, beta_m, beta_m, beta_m],
+        [beta_m, 0, beta_m, beta_m, beta_m, beta_m, beta_m, beta_m],
+        [beta_m, beta_m, 0, beta_m, beta_m, beta_m, beta_m, beta_m],
+        [beta_m, beta_m, beta_m, 0, beta_m, beta_m, beta_m, beta_m],
+        [beta_m, beta_m, beta_m, beta_m, 0, beta_m, beta_m, beta_m],
+        [beta_m, beta_m, beta_m, beta_m, beta_m, 0, beta_m, beta_m],
+        [beta_m, beta_m, beta_m, beta_m, beta_m, beta_m, 0, beta_m],
+        [beta_m, beta_m, beta_m, beta_m, beta_m, beta_m, beta_m, 0]
+    ]
+
+    # NVLink bandwidth for each link
+    invbw1 = int(topo_json["node_invbws_list"][0])
+    invbws = [
+        [0, invbw1, invbw1, invbw1, invbw1, invbw1, invbw1, invbw1],
+        [invbw1, 0, invbw1, invbw1, invbw1, invbw1, invbw1, invbw1],
+        [invbw1, invbw1, 0, invbw1, invbw1, invbw1, invbw1, invbw1],
+        [invbw1, invbw1, invbw1, 0, invbw1, invbw1, invbw1, invbw1],
+        [invbw1, invbw1, invbw1, invbw1, 0, invbw1, invbw1, invbw1],
+        [invbw1, invbw1, invbw1, invbw1, invbw1, 0, invbw1, invbw1],
+        [invbw1, invbw1, invbw1, invbw1, invbw1, invbw1, 0, invbw1],
+        [invbw1, invbw1, invbw1, invbw1, invbw1, invbw1, invbw1, 0]
+    ]
+    # Ex. for 1 MB data chunks, the following matrix denotes node invbws
+    # invbws = [
+    #     [0, 23, 46, 46, 23, 0, 0, 0],
+    #     [23, 0, 46, 23, 0, 46, 0, 0],
+    #     [46, 46, 0, 23, 0, 0, 23, 0],
+    #     [46, 23, 23, 0, 0, 0, 0, 46],
+    #     [23, 0, 0, 0, 0, 23, 46, 46],
+    #     [0, 46, 0, 0, 23, 0, 46, 23],
+    #     [0, 0, 23, 0, 46, 46, 0, 23],
+    #     [0, 0, 0, 46, 46, 23, 23, 0]
+    # ]
+    nics_per_node = topo_json["nics_per_node"]
+    remote_invbw = topo_json["remote_invbw"]
+    remote_alpha = topo_json["remote_alpha"]
+    remote_beta = topo_json["remote_beta"]
+    name = topo_json["name"]
+
+    return NodeTopology(f'MI300X-{name}', links, alpha, betas, invbws, nics_per_node, remote_invbw, remote_alpha, remote_beta)
