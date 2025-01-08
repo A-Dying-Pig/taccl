@@ -2,3 +2,8 @@
 *.ilp
 __pycache__
 *.egg-info
+*.npy
+Alltoall*.json
+*.pkl
+*.lp
+build
