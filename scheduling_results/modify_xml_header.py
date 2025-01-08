@@ -25,4 +25,5 @@ def modify_header_only(input_folder, output_folder, fname):
         f.write('\n'.join(res))
 
 
-modify_header_only("./", "./r", "Alltoall.n16-MI300X-MI300X-steps2-tacclsol-improve-1736366150_i1_scRemote1_IBContig.sccl.xml")
+# modify_header_only("./", "./r", "Alltoall.n16-MI300X-MI300X-steps2-tacclsol-improve-1736366150_i1_scRemote1_IBContig.sccl.xml")
+modify_header_only("./", "./r", "Alltoall.n8-MI300X-DUMB-MI300X-DUMB-steps2-tacclsol-improve-1736374135_i1_scRemote1_IBContig.sccl.xml")

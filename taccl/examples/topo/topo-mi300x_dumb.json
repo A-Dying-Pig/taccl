@@ -1,0 +1,11 @@
+{
+    "name": "MI300X-DUMB",
+    "gpus_per_node": 4,
+    "nics_per_node": 4,
+    "alpha": 0.3,
+    "node_betas_list": [21],
+    "node_invbws_list":  [21],
+    "remote_invbw": 93,
+    "remote_alpha": 2.6,
+    "remote_beta": 91
+}

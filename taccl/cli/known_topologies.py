@@ -14,6 +14,7 @@ class KnownTopologies:
             'DGX2': self._topo(topologies.dgx2),
             'NDv2': self._topo(topologies.ndv2),
             'MI300X': self._topo(topologies.mi300x),
+            'MI300X_DUMB': self._topo(topologies.mi300x_dumb),
             'custom': self._topo(topologies.custom),
         }
         self.parser.add_argument(f'topology{tag}', type=str, choices=self.constructors.keys(), help=f'topology {tag}')
